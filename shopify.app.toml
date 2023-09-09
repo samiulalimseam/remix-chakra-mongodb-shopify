@@ -1,0 +1,28 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+name = "alamin-app"
+client_id = "3af2752c474fe0e3ba6b8688fec603ee"
+application_url = "https://reforms-adapters-frequency-indicated.trycloudflare.com"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+use_legacy_install_flow = true
+
+[auth]
+redirect_urls = [
+  "https://reforms-adapters-frequency-indicated.trycloudflare.com/auth/callback",
+  "https://reforms-adapters-frequency-indicated.trycloudflare.com/auth/shopify/callback",
+  "https://reforms-adapters-frequency-indicated.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2023-04"
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "al-amin-extensibility-store.myshopify.com"
