@@ -2,7 +2,7 @@
   "name": "chakra-boilerplate",
   "private": true,
   "scripts": {
-    "build": "NODE_ENV=production remix build prisma generate && npm run build:production",
+    "build": "NODE_ENV=production remix build prisma generate ",
     "predev": "prisma generate ",
     "dev": "shopify app dev",
     "config:link": "shopify app config link",
