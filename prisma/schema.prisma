@@ -6,12 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:dev.sqlite"
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
-
 model Session {
-  id          String    @id
+  session_id  String    @id @default(auto()) @map("_id") @db.ObjectId
+  id          String    @unique
   shop        String
   state       String
   isOnline    Boolean   @default(false)

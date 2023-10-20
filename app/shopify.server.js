@@ -4,11 +4,15 @@ import {
   DeliveryMethod,
   shopifyApp,
   LATEST_API_VERSION,
+  BillingInterval,
 } from "@shopify/shopify-app-remix/server";
 import { PrismaSessionStorage } from "@shopify/shopify-app-session-storage-prisma";
 import { restResources } from "@shopify/shopify-api/rest/admin/2023-07";
 
 import prisma from "./db.server";
+
+export const SILVER_PLAN = 'Silver';
+export const GOLD_PLAN = 'Gold';
 
 const shopify = shopifyApp({
   apiKey: process.env.SHOPIFY_API_KEY,
@@ -25,6 +29,10 @@ const shopify = shopifyApp({
       deliveryMethod: DeliveryMethod.Http,
       callbackUrl: "/webhooks",
     },
+    ORDERS_CREATE: {
+      deliveryMethod: DeliveryMethod.Http,
+      callbackUrl: "/webhooks",
+    },
   },
   hooks: {
     afterAuth: async ({ session }) => {
@@ -34,6 +42,18 @@ const shopify = shopifyApp({
   ...(process.env.SHOP_CUSTOM_DOMAIN
     ? { customShopDomains: [process.env.SHOP_CUSTOM_DOMAIN] }
     : {}),
+    billing: {
+      [SILVER_PLAN]: {
+        amount: 4.99,
+        currencyCode: 'USD',
+        interval: BillingInterval.Every30Days,
+      },
+      [GOLD_PLAN]: {
+        amount: 9.99,
+        currencyCode: 'USD',
+        interval: BillingInterval.Every30Days,
+      },
+    }
 });
 
 export default shopify;
